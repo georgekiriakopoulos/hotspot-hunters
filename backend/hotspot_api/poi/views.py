@@ -1,28 +1,25 @@
-from django.shortcuts import render
 from rest_framework import generics
-import io, csv, pandas as pd
+import pandas as pd
 from rest_framework.response import Response
-from .serializers import FileUploadSerializer
+from .serializers import PoiUploadSerializer
 from .models import PointOfInterest
 from rest_framework import status
 
 
-class UploadFileView(generics.CreateAPIView):
-    serializer_class = FileUploadSerializer
+class UploadPoiView(generics.CreateAPIView):
+    serializer_class = PoiUploadSerializer
     
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         file = serializer.validated_data['file']
-        reader = pd.read_csv(file)
+        reader = pd.read_csv(file, encoding_errors='ignore')
         for _, row in reader.iterrows():   
             print(row)
-            # new_poi = PointOfInterest(
-            #            id = row['id'],
-            #            staff_name= row["Staff Name"],
-            #            position= row['Designated Position'],
-            #            age= row["Age"],
-            #            year_joined= row["Year Joined"]
-            #            )
-            # new_poi.save()
-        return Response({"status": "success"},status.HTTP_201_CREATED)
+            new_poi = PointOfInterest(
+                       id = row['id'],
+                       latitude = row['lat'],
+                       longitude = row['lon'],
+            )
+            new_poi.save()
+        return Response("Successfully created new PointsofInterest.",status.HTTP_201_CREATED)

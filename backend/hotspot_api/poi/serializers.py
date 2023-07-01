@@ -7,12 +7,11 @@ class PointOfInterestSerializer(serializers.ModelSerializer):
         model = PointOfInterest
         fields = "__all__"
 
-class FileUploadSerializer(serializers.Serializer):
+class PoiUploadSerializer(serializers.Serializer):
     file = serializers.FileField()
 
     
-class SaveFileSerializer(serializers.Serializer):
-    
+class SavePoiSerializer(serializers.Serializer):
     class Meta:
         model = PointOfInterest
         fields = "__all__"
