@@ -1,0 +1,56 @@
+
+
+.header1 {
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.t1{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 30px;
+  color: green;
+}
+
+.t2{
+
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 40px;
+  color: green;
+
+
+}
+.header {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header ul{
+    display: flex;
+    list-style: none;
+  }
+
+  .header li{
+    padding: 10px 10px;
+    margin: 0px 5px;
+    text-decoration: none;
+    color: green;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+
+  }
+  
+
+  
+  .list a {
+    text-decoration: none;
+    color: var(--color-primary-400);
+  }
+  
+  .list a:hover,
+  .list a.active {
+    color: var(--color-primary-800);
+  }
+  
