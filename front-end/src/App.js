@@ -1,6 +1,5 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import styles from './App.module.css';
-import { MapContainer, TileLayer } from 'react-leaflet'
 import MapsComp from './components/Mapcomp'
 import Header from './components/Header'
 import Search from './components/Search'
