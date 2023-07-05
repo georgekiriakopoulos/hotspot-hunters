@@ -1,5 +1,4 @@
-
-import { NavLink } from 'react-router-dom';
+import logo from './images/logo.png';
 import classes from './Header.module.css';
 
 
@@ -7,7 +6,7 @@ const Header = () => {
     return(
         <header className={classes.t3}>
             <div className={classes.header} >
-                <h2 className={classes.t1}> HOT SPOT HUNTERS</h2>
+            <img src={logo} width={200} height={200} />
                 <nav>
                     <ul>
                         <li>Home</li>
