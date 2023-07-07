@@ -9,21 +9,6 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.password_validation import validate_password
 from .models import User
 from .serializers import UserSerializer
-# from .serializers import LoginSerializer
-
-def welcome(request):
-  return HttpResponse("Welcome to the User App!")
-
-# class LoginView(GenericAPIView):
-#     permission_classes = ()
-#     authentication_classes = ()
-#     serializer_class = LoginSerializer
-
-#     def post(self, request):
-#         serializer = self.serializer_class(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-
-#         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class RegisterView(APIView):
   serializer_class = UserSerializer
