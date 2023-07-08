@@ -1,12 +1,4 @@
 import style from './Login.module.css';
-// export const Register = (props) => {
-//   const [email, setEmail] = useState("");
-//   const [psw, setPsw] = useState("");
-//   const [psw2, setPsw2] = useState("");
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log(email);
-//   };
 
 function Register ({ open, onClose }) {
   if (!open) return null;

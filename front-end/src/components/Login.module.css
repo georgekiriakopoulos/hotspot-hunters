@@ -1,16 +1,4 @@
-/* .overlay {
-    
-    position: fixed;
-    width: 60%;
-    height: 40%;
-    background-color: antiquewhite;
-    opacity: 0.8;
-    margin: auto;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  } */
 
   .t1{
     display: flex;
@@ -30,3 +18,5 @@
   .overlay div{
     padding: 5px;
   }
+
+  
