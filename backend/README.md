@@ -3,7 +3,7 @@ Install psql from your terminal.
 On a terminal run:
 1. `$ sudo -u postgres psql`
 once you enter your credentials for sudo etch and you are inside the psql terminal run:
-2. `$ CREATE DATABASE hotspot_db;`  (yes with a semi column in the end, also make sure you configure your database that you set here on your settings.py file)
+2. `$ CREATE DATABASE hotspot_db3;`  (yes with a semi column in the end, also make sure you configure your database that you set here on your settings.py file)
 
 
 ### Setting up (virtualenv)
