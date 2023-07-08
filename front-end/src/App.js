@@ -1,7 +1,6 @@
 import styles from "./App.module.css";
 import MapsComp from "./components/Mapcomp";
 import Header from "./components/Header";
-import Search from "./components/Search";
 import { SearchBar } from "./components/SearchBar";
 import { SearchResultsList } from "./components/SearchResultsList";
 import React,{useState} from "react";
