@@ -16,3 +16,4 @@ pandas==2.0.2
 chardet==5.1.0
 pytest==6.2.5
 pytest-django==4.4.0
+dj-database-url==2.0.0
