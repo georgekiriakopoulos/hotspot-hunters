@@ -14,3 +14,14 @@
   padding-top: 60px;
   /* margin: auto; */
 }
+
+.saveButton{
+  position: relative;
+  border-color: rgb(41, 71, 155);
+  background-color: rgb(96, 204, 253);
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  color: rgb(41, 71, 155);
+  margin-left: 80px;
+}

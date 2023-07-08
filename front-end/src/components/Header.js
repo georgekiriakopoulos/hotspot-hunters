@@ -6,7 +6,7 @@ const Header = () => {
     return(
         <header className={classes.t3}>
             <div className={classes.header} >
-            <img src={logo} width={200} height={200} />
+            <img src={logo} width={200} height={200} alt = "logo"/>
                 <nav>
                     <ul>
                         <li>Home</li>

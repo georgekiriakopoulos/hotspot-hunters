@@ -46,7 +46,7 @@
   color: var(--color-primary-800);
 }
 
-button {
+button{
   border-color: green;
   background-color: rgba(234,156,49,1);
   padding: 10px;
@@ -54,5 +54,6 @@ button {
   border-radius: 10px;
   color: green;
   margin-left: 5px;
-  
 }
+
+
