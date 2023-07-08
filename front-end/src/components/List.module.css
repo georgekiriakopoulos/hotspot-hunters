@@ -1,0 +1,33 @@
+.my-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .my-list li {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .my-list li:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .my-list li span {
+    font-weight: bold;
+  }
+  
+  .my-list li .delete-button {
+    background-color: #f63c3c;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  

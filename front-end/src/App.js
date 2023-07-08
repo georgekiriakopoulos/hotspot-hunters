@@ -2,14 +2,21 @@ import styles from "./App.module.css";
 import MapsComp from "./components/Mapcomp";
 import Header from "./components/Header";
 import Search from "./components/Search";
-
+import { SearchBar } from "./components/SearchBar";
+import { SearchResultsList } from "./components/SearchResultsList";
+import React,{useState} from "react";
 function App() {
+  const [results, setResults] = useState([]);
+
   return (
     <div className={styles.c4}>
       <Header></Header>
 
-      <Search className={styles.c2}></Search>
-
+      
+      <div className="search-bar-container">
+        <SearchBar setResults={setResults} />
+        {results && results.length > 0 && <SearchResultsList results={results} />}
+      </div>
       <MapsComp className={styles.c2}></MapsComp>
     </div>
   );
