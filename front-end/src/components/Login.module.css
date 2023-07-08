@@ -1,0 +1,32 @@
+/* .overlay {
+    
+    position: fixed;
+    width: 60%;
+    height: 40%;
+    background-color: antiquewhite;
+    opacity: 0.8;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  } */
+
+  .t1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .overlay{
+    position: fixed;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 10px;
+  }
+
+  .overlay div{
+    padding: 5px;
+  }
