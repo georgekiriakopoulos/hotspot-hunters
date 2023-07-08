@@ -5,6 +5,7 @@ import {
   Circle,
   Popup,
   useMapEvents,
+  Tooltip,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from "./Mc.module.css";
@@ -24,14 +25,7 @@ function Mapcomp() {
   });
 
   const handleMarkerClick = (marker) => {
-    if (newMarker === marker) {
-      // User clicked on the new marker again, add the circle
-      setSelectedMarker(marker);
-      
-    } else {
-      setSelectedMarker(marker);
-      setNewMarker(null);
-    }
+    setSelectedMarker(marker);
   };
 
   const closeCircleClick = () => {
@@ -40,21 +34,28 @@ function Mapcomp() {
   };
 
   const handleSaveButtonClick = () => {
-    if (selectedMarker) {
-      // Perform save action with selectedMarker information
-      console.log("Saving marker:", selectedMarker);
-    }
     if (newMarker) {
-      // Perform save action with newMarker information
-      console.log("Saving circle:", newMarker);
+      setSelectedMarker(newMarker);
     }
+    // Perform save action with selectedMarker information
+    console.log("Saving marker:", selectedMarker);
   };
 
-  const AddMarkerOnClick = () => {
+  const AddMarkerOnClick = (e) => {
     useMapEvents({
       click: (e) => {
         const { lat, lng } = e.latlng;
-        setNewMarker({ latitude: lat, longitude: lng });
+        if (!selectedMarker) {
+          // No marker is selected, create a new marker
+          setNewMarker({ latitude: lat, longitude: lng });
+        } else {
+          // Marker is already selected, update its position
+          setSelectedMarker({
+            ...selectedMarker,
+            latitude: lat,
+            longitude: lng,
+          });
+        }
       },
     });
 
@@ -67,7 +68,10 @@ function Mapcomp() {
             dblclick: () => closeCircleClick(),
             contextmenu: () => closeCircleClick(),
           }}
-        />
+        >
+
+          <Tooltip>Click to save the area within 10km <br/> or right click to delete point!</Tooltip>
+        </Marker>
       );
     }
 
@@ -95,7 +99,9 @@ function Mapcomp() {
               dblclick: () => closeCircleClick(),
               contextmenu: () => closeCircleClick(),
             }}
-          />
+          >
+            <Tooltip>Click to save the area within 10km  <br/> or double click to delete point!</Tooltip>
+          </Marker>
         ))}
 
         {selectedMarker && (
@@ -105,6 +111,9 @@ function Mapcomp() {
             radius={10000}
             eventHandlers={{ contextmenu: () => closeCircleClick() }}
           >
+            <Tooltip>
+              Click on the circled area to save or right click to close!
+            </Tooltip>
             <Popup>
               Save the area within 10km of your chosen wifi point so that you
               get notified when new points are available!
