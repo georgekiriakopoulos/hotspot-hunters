@@ -17,6 +17,7 @@ class Category(models.Model):
 
 class Circle(models.Model):
     id = models.AutoField(primary_key=True)
-    poi = models.ForeignKey('PointOfInterest', on_delete=models.CASCADE, null=True, blank=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     user = models.ForeignKey('user.User', on_delete=models.CASCADE, null=True, blank=True)  
     radius = models.IntegerField(null=True, blank=True, default=10000)

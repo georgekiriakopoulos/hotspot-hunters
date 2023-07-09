@@ -18,7 +18,6 @@ class SavePoiSerializer(serializers.Serializer):
 
 class PoiCircleSerializer(serializers.Serializer):
     user_id = serializers.IntegerField()
-    poi_id = serializers.IntegerField()
     class Meta:
         model = Circle 
         fields = "__all__"

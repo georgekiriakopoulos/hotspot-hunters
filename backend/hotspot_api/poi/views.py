@@ -69,12 +69,10 @@ class PoiCircleView(APIView):
         serializer.is_valid(raise_exception=True)
         
         user_id = serializer.validated_data['user_id']
-        poi_id = serializer.validated_data['poi_id']
         
         user = User.objects.get(pk=user_id)
-        poi = PointOfInterest.objects.get(pk=poi_id)
         
-        Circle.objects.get_or_create(poi=poi, user=user) 
+        Circle.objects.get_or_create(user=user, latitude=payload['latitude'], longitude=payload['longitude']) 
         return Response(status=status.HTTP_201_CREATED)
 
     
