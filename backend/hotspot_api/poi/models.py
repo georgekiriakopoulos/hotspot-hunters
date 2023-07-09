@@ -14,3 +14,9 @@ class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, unique=True, null=True, blank=True)
 
+
+class Circle(models.Model):
+    id = models.AutoField(primary_key=True)
+    poi = models.ForeignKey('PointOfInterest', on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey('user.User', on_delete=models.CASCADE, null=True, blank=True)  
+    radius = models.IntegerField(null=True, blank=True, default=10000)
