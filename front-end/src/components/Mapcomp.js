@@ -112,8 +112,14 @@ function Mapcomp() {
                 contextmenu: () => closeCircleClick(),
               }}
             >
+              <Popup>
+                <div>
+                  <h3>{points.title}</h3>
+                  <p>{points.description}</p>
+                </div>
+              </Popup>
               <Tooltip>
-                Click to save the area within 10km <br /> or double click to
+                Click to save the area within 10km <br /> or right click to
                 delete point!
               </Tooltip>
             </Marker>
