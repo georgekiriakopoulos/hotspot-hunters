@@ -10,12 +10,21 @@ import {
 import "leaflet/dist/leaflet.css";
 import styles from "./Mc.module.css";
 import L from "leaflet";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Mapcomp() {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [newMarker, setNewMarker] = useState(null);
-  let wifipoints = [];
+  const [wifipoints, setWifipoints] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/poi/poi/")
+      .then((response) => response.json())
+      .then((data) => setWifipoints(data))
+      .catch((error) => {
+        console.error("Error fetching wifipoints:", error);
+      });
+  }, []);
 
   delete L.Icon.Default.prototype._getIconUrl;
   L.Icon.Default.mergeOptions({
@@ -69,93 +78,76 @@ function Mapcomp() {
             contextmenu: () => closeCircleClick(),
           }}
         >
-
-          <Tooltip>Click to save the area within 10km <br/> or right click to delete point!</Tooltip>
+          <Tooltip>
+            Click to save the area within 10km <br /> or right click to delete
+            point!
+          </Tooltip>
         </Marker>
       );
     }
-
-    fetch('http://127.0.0.1:8000/api/poi/poi/') 
-    .then(response => response.json())
-    .then(data => {
-      wifipoints = data; 
-  
-      // Display the data
-      console.log(wifipoints); // Example: Log the data to the console
-  
-      // You can perform further operations with the wifiPoints array here
-    })
-    .catch(error => {
-      console.error('Error:', error); // Log any errors that occur during the fetch process
-    });
 
     return null;
   };
 
   return (
     <>
-    <div> {wifipoints.map(points => ( 
-      {points} ))}
-    </div>
-    <div className={styles.c0}>
-      <MapContainer
-        className={styles.lc}
-        center={[37.98381, 23.727539]}
-        zoom={13}
-      >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+      <div className={styles.c0}>
+        <MapContainer
+          className={styles.lc}
+          center={[37.98381, 23.727539]}
+          zoom={13}
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-        {wifipoints.map(points => ( 
-          {points}
-          // <Marker
-          //   key={points.id}
-          //   position={[points.latitude, points.longitude]}
-          //   eventHandlers={{
-          //     click: () => handleMarkerClick(points),
-          //     dblclick: () => closeCircleClick(),
-          //     contextmenu: () => closeCircleClick(),
-          //   }}
-          // >
-          //   <Tooltip>Click to save the area within 10km  <br/> or double click to delete point!</Tooltip>
-          // </Marker>
-        ))} 
+          {wifipoints.map((points) => (
+            <Marker
+              key={points.id}
+              position={[points.latitude, points.longitude]}
+              eventHandlers={{
+                click: () => handleMarkerClick(points),
+                dblclick: () => closeCircleClick(),
+                contextmenu: () => closeCircleClick(),
+              }}
+            >
+              <Tooltip>
+                Click to save the area within 10km <br /> or double click to
+                delete point!
+              </Tooltip>
+            </Marker>
+          ))}
 
-     
+          {selectedMarker && (
+            <Circle
+              center={[selectedMarker.latitude, selectedMarker.longitude]}
+              fillOpacity={0.5}
+              radius={10000}
+              eventHandlers={{ contextmenu: () => closeCircleClick() }}
+            >
+              <Tooltip>
+                Click on the circled area to save or right click to close!
+              </Tooltip>
+              <Popup>
+                Save the area within 10km of your chosen wifi point so that you
+                get notified when new points are available!
+                <br />
+                <button
+                  className={styles.saveButton}
+                  onClick={handleSaveButtonClick}
+                >
+                  Save Area of Interest
+                </button>
+              </Popup>
+            </Circle>
+          )}
 
-        {selectedMarker && (
-          <Circle
-            center={[selectedMarker.latitude, selectedMarker.longitude]}
-            fillOpacity={0.5}
-            radius={10000}
-            eventHandlers={{ contextmenu: () => closeCircleClick() }}
-          >
-            <Tooltip>
-              Click on the circled area to save or right click to close!
-            </Tooltip>
-            <Popup>
-              Save the area within 10km of your chosen wifi point so that you
-              get notified when new points are available!
-              <br />
-              <button
-                className={styles.saveButton}
-                onClick={handleSaveButtonClick}
-              >
-                Save Area of Interest
-              </button>
-            </Popup>
-          </Circle>
-        )}
-
-        <AddMarkerOnClick />
-      </MapContainer>
-    </div>
+          <AddMarkerOnClick />
+        </MapContainer>
+      </div>
     </>
   );
-  
 }
-
 
 export default Mapcomp;
