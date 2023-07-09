@@ -43,11 +43,31 @@ function Mapcomp() {
   };
 
   const handleSaveButtonClick = () => {
-    if (newMarker) {
-      setSelectedMarker(newMarker);
+    if (selectedMarker) {
+      const { latitude, longitude } = selectedMarker;
+      const circleData = {
+        latitude,
+        longitude,
+        radius: 10000, // Assuming the radius is fixed at 10000 meters
+      };
+
+      fetch("http://127.0.0.1:8000/api/poi/poi/circle/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(circleData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Circle saved successfully:", data);
+          // Perform any necessary actions after saving the circle
+        })
+        .catch((error) => {
+          console.error("Error saving circle:", error);
+          // Handle the error case
+        });
     }
-    // Perform save action with selectedMarker information
-    console.log("Saving marker:", selectedMarker);
   };
 
   const AddMarkerOnClick = (e) => {
