@@ -10,4 +10,5 @@ urlpatterns = [
     path('poi/circle/list/', views.PoiCircleListView.as_view(), name='circle-list'),
     path('poi/circle/<int:pk>/', views.PoiCircleDetail.as_view(), name='circle-detail'),
     path('poi/circles/<int:user_id>/', views.CircleByUserIdView.as_view(), name='circles-by-user-id'),
+    path('poi/search', views.SearchPoiView.as_view(), name='search-poi'),
 ]
