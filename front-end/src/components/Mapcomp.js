@@ -111,7 +111,7 @@ function Mapcomp() {
 
   return (
     <>
-      <div className={styles.c0}>
+      <div className={styles.lc}>
         <MapContainer
           className={styles.lc}
           center={[37.98381, 23.727539]}
