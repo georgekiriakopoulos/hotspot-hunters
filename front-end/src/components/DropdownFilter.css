@@ -1,0 +1,46 @@
+/* DropdownFilter.css */
+
+.dropdown-filter-container {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .dropdown-filter-select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  .dropdown-filter-select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  option {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: #fff;
+    border: 1px solid #af1515;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+  
+  .dropdown-filter-option {
+    padding: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .dropdown-filter-option:hover {
+    background-color: #f5f5f5;
+  }
+  
+  
