@@ -9,12 +9,20 @@
   );
   padding: 15px;
   border-radius: 10px;
+  z-index: 1;
 }
 
 .c1{
  
   display: flex;
 
+}
 
-
+.c2 {
+  z-index: 1;
+  width: 80%;
+  height: 700px;
+  padding-top: 60px;
+  margin: auto;
+  position: relative;
 }
