@@ -3,24 +3,29 @@ import { FaSearch } from "react-icons/fa";
 
 import "./SearchBar.css";
 
-const SearchBar = (props) => {
+export const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
 
-  const handleChange = (event) => {
-    setInput(event.target.value);
-
-    console.log(input);
-
-    // fetchData(value);
+  const fetchData = (value) => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((json) => {
+        const results = json.filter((user) => {
+          return (
+            value &&
+            user &&
+            user.name &&
+            user.name.toLowerCase().includes(value)
+          );
+        });
+        setResults(results);
+      });
   };
 
- const  handleKeyPress=(e) => {
-    if (e.key === 'Enter') {
-      console.log("rgvervberbve");
-      console.log(props.onsavesmth);
-      actionlogin(props);
-    }
-  }
+  const handleChange = (value) => {
+    setInput(value);
+    fetchData(value);
+  };
 
   return (
     <div className="input-wrapper">
@@ -28,37 +33,8 @@ const SearchBar = (props) => {
       <input
         placeholder="Type to search..."
         value={input}
-        onChange={handleChange}
-        onKeyUp={(e) => handleKeyPress(e)}
+        onChange={(e) => handleChange(e.target.value)}
       />
     </div>
   );
 };
-
-
-export default SearchBar;
-
-export async function actionlogin(props) {
-
-  const requestOptions = {
-    method: "GET",
-    headers: { "Content-Type": "application/json"
-               }
-  };
-
-
-  const response = await fetch(
-    "http://127.0.0.1:8000/api/poi/poi/",
-    requestOptions
-  );
-  const requestdata = await response.json();
-  const token = requestdata;
-  console.log("token");
-  console.log(token);
-  console.log("toke n");
-
-  console.log(token[0]);
-  props.onsavesmth(token);
-
- 
-}

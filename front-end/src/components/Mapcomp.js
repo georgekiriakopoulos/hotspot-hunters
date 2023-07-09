@@ -48,7 +48,7 @@ function Mapcomp() {
       const circleData = {
         latitude,
         longitude,
-        radius: 10000, // Assuming the radius is fixed at 10000 meters
+        radius: 5000, // Assuming the radius is fixed at 10000 meters
       };
 
       fetch("http://127.0.0.1:8000/api/poi/poi/circle/", {
@@ -110,7 +110,7 @@ function Mapcomp() {
   };
 
   return (
-    <>
+    
       <div className={styles.lc}>
         <MapContainer
           className={styles.lc}
@@ -149,7 +149,7 @@ function Mapcomp() {
             <Circle
               center={[selectedMarker.latitude, selectedMarker.longitude]}
               fillOpacity={0.5}
-              radius={10000}
+              radius={5000}
               eventHandlers={{ contextmenu: () => closeCircleClick() }}
             >
               <Tooltip>
@@ -172,7 +172,6 @@ function Mapcomp() {
           <AddMarkerOnClick />
         </MapContainer>
       </div>
-    </>
   );
 }
 
