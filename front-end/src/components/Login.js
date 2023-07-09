@@ -16,7 +16,7 @@ function Login({ open, onClose }) {
     event.preventDefault();
     // console.log(name);
     // console.log(password);
-    action(name, password);
+    actionlogin(name, password);
     setname("");
     setpassword("");
   };
@@ -32,24 +32,40 @@ function Login({ open, onClose }) {
   if (!open) return null;
   return (
     <form onSubmit={submithandler} className={style.overlay}>
-      <div className={style.t1}>
-        <h2> Login Form</h2>
-        <h3 onClick={onClose}>X</h3>
+      
+     
+      <div   className={style.t5}>
+
+
+      <div className={style.t0}>
+      <h3 className={style.t1} onClick={onClose}> </h3>
+
+      
+      <h2 className={style.t3} >ΣΥΝΔΕΣΟΥ</h2>
+      <h3 className={style.t1} onClick={onClose}>X</h3>
+
+
       </div>
+
+       
+     
 
       <div>
         <div className="loginForm">
           <label htmlFor="email">
             <b>Email</b>
-          </label>
+          
           <input
+          className={style.in}
             type="email"
             placeholder="π.χ youremail@youremail.com"
             name="email"
             required
             onChange={usernameinputhandler}
             value={name}
+            
           />
+          </label>
         </div>
       </div>
 
@@ -57,7 +73,7 @@ function Login({ open, onClose }) {
         <div className="loginForm">
           <label htmlFor="psw">
             <b>Συνθηματικό</b>
-          </label>
+          
           <input
             type="password"
             id="password"
@@ -67,6 +83,7 @@ function Login({ open, onClose }) {
             onChange={passwordinputhandler}
             value={password}
           />
+          </label>
         </div>
       </div>
       <div>
@@ -74,17 +91,17 @@ function Login({ open, onClose }) {
       </div>
 
       <button> Δεν είσαι μέλος; Κάνε Εγγραφή</button>
+      </div>    
     </form>
   );
 }
 
 export default Login;
 
-export async function action(name, password) {
+export async function actionlogin(name, password) {
   const datasend = {
     email: name,
     password: password,
-    password2: password,
   };
   const requestOptions = {
     method: "POST",
@@ -95,7 +112,16 @@ export async function action(name, password) {
   console.log(datasend.password);
 
   const response = await fetch(
-    "http://127.0.0.1:8000/api/user/register/",
+    "http://127.0.0.1:8000/api/login/",
     requestOptions
-  ).then((response) => response.json());
+  );
+
+  const requestdata = await response.json();
+  const token = requestdata.access;
+  console.log("token");
+  console.log(token);
+
+  localStorage.setItem('token',token);
+
+
 }
