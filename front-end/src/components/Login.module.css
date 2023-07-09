@@ -1,22 +1,73 @@
 
+.t0{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+
+
+}
+
+label input[type=email] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color:azure;
+  border-radius: 15px;
+}
+
+input[type=email]:focus {
+  background-color: lightblue;
+}
+
+label input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color:azure;
+  border-radius: 15px;
+}
+
+input[type=password]:focus {
+  background-color: lightblue;
+}
 
   .t1{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    color: red;
   }
 
   .overlay{
-    position: fixed;
-    background-color: antiquewhite;
+    position: fixed;    
     display: flex;
     flex-direction: column;
-    padding: 30px;
-    border-radius: 10px;
+    justify-content: center;  
+    z-index: 100;
+    background-color: rgb(0, 0, 0,0.5);
+    width: 100%;
+    height: 200%;
+ 
+
   }
 
-  .overlay div{
-    padding: 5px;
+  .t5{
+
+
+    background-color:blanchedalmond;
+    border-radius: 10px;
+    padding: 20px;
+    margin: auto;
+    z-index: 10;
+
+    
+  }
+
+  .t3{
+
+
+    color: green;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
   
