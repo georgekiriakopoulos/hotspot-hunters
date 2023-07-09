@@ -3,9 +3,11 @@ import pandas as pd
 from rest_framework.response import Response
 from .serializers import PoiUploadSerializer
 from .serializers import PointOfInterestSerializer
-from .models import PointOfInterest, Category
+from .serializers import PoiCircleSerializer 
+from .models import PointOfInterest, Category, Circle 
 from rest_framework import status
 from rest_framework.views import APIView
+from user.models import User     
 
 
 class UploadPoiView(generics.CreateAPIView):
@@ -57,3 +59,53 @@ class PoiDetailView(APIView):
         poi = PointOfInterest.objects.get(pk=pk)
         poi.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class PoiCircleView(APIView):
+    serializer_class = PoiCircleSerializer
+
+    def post(self, request):
+        payload = request.data
+        serializer = self.serializer_class(data=payload)
+        serializer.is_valid(raise_exception=True)
+        
+        user_id = serializer.validated_data['user_id']
+        poi_id = serializer.validated_data['poi_id']
+        
+        user = User.objects.get(pk=user_id)
+        poi = PointOfInterest.objects.get(pk=poi_id)
+        
+        Circle.objects.get_or_create(poi=poi, user=user) 
+        return Response(status=status.HTTP_201_CREATED)
+
+    
+class PoiCircleListView(APIView):
+    serializer_class = PoiCircleSerializer
+
+    def get(self, request):
+        queryset = Circle.objects.all()
+        serializer = PoiCircleSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class CircleByUserIdView(generics.ListAPIView):
+    serializer_class = PoiCircleSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        queryset = Circle.objects.filter(user_id=user_id)
+        return queryset
+
+class PoiCircleDetail(APIView):
+    serializer_class = PoiCircleSerializer
+
+    def get(self, request, pk):
+        queryset = Circle.objects.filter(user=pk)
+        serializer = PoiCircleSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    def delete(self, request, pk):
+        queryset = Circle.objects.filter(user=pk)
+        queryset.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
