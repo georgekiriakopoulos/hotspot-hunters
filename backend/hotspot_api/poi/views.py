@@ -71,7 +71,7 @@ class SearchPoiView(APIView):
                 pois = pois.filter(latitude__range=(min_lat, max_lat), longitude__range=(min_lon, max_lon))
 
             if keywords:
-                pois = pois.filter(Q(district__icontains=keywords) | Q(description__icontains=keywords))
+                pois = pois.filter(Q(district__in=keywords) | Q(description__in=keywords))
 
             if categories:
                 pois = pois.filter(category__in=categories)
