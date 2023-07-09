@@ -38,3 +38,5 @@ export const SearchBar = ({ setResults }) => {
     </div>
   );
 };
+
+export default SearchBar;
