@@ -9,13 +9,13 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from "./Mc.module.css";
-import wifipoints from "./data/wifi-points.json";
 import L from "leaflet";
 import React, { useState } from "react";
 
 function Mapcomp() {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [newMarker, setNewMarker] = useState(null);
+  let wifipoints = [];
 
   delete L.Icon.Default.prototype._getIconUrl;
   L.Icon.Default.mergeOptions({
@@ -75,10 +75,28 @@ function Mapcomp() {
       );
     }
 
+    fetch('http://127.0.0.1:8000/api/poi/poi/') 
+    .then(response => response.json())
+    .then(data => {
+      wifipoints = data; 
+  
+      // Display the data
+      console.log(wifipoints); // Example: Log the data to the console
+  
+      // You can perform further operations with the wifiPoints array here
+    })
+    .catch(error => {
+      console.error('Error:', error); // Log any errors that occur during the fetch process
+    });
+
     return null;
   };
 
   return (
+    <>
+    <div> {wifipoints.map(points => ( 
+      {points} ))}
+    </div>
     <div className={styles.c0}>
       <MapContainer
         className={styles.lc}
@@ -90,19 +108,22 @@ function Mapcomp() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {wifipoints.map((points) => (
-          <Marker
-            key={points.id}
-            position={[points.latitude, points.longitude]}
-            eventHandlers={{
-              click: () => handleMarkerClick(points),
-              dblclick: () => closeCircleClick(),
-              contextmenu: () => closeCircleClick(),
-            }}
-          >
-            <Tooltip>Click to save the area within 10km  <br/> or double click to delete point!</Tooltip>
-          </Marker>
-        ))}
+        {wifipoints.map(points => ( 
+          {points}
+          // <Marker
+          //   key={points.id}
+          //   position={[points.latitude, points.longitude]}
+          //   eventHandlers={{
+          //     click: () => handleMarkerClick(points),
+          //     dblclick: () => closeCircleClick(),
+          //     contextmenu: () => closeCircleClick(),
+          //   }}
+          // >
+          //   <Tooltip>Click to save the area within 10km  <br/> or double click to delete point!</Tooltip>
+          // </Marker>
+        ))} 
+
+     
 
         {selectedMarker && (
           <Circle
@@ -131,7 +152,10 @@ function Mapcomp() {
         <AddMarkerOnClick />
       </MapContainer>
     </div>
+    </>
   );
+  
 }
+
 
 export default Mapcomp;
