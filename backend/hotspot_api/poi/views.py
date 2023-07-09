@@ -1,3 +1,6 @@
+from ast import literal_eval
+import json
+from django.db.models import Q
 from rest_framework import generics
 import pandas as pd
 from rest_framework.response import Response
@@ -31,6 +34,59 @@ class UploadPoiView(generics.CreateAPIView):
             )
             new_poi.save()
         return Response("Successfully created new PointsofInterest.",status.HTTP_201_CREATED)
+
+class SearchPoiView(APIView):
+    def get(self, request):
+        start = request.data.get('start')
+        count = request.data.get('count')
+        text = request.data.get('text')
+        filters = request.data.get('filters')
+
+        if filters is not None:
+            try:
+                filters = json.loads(filters)
+            except json.JSONDecodeError:
+                try:
+                    filters = literal_eval(filters)
+                except (ValueError, SyntaxError, TypeError):
+                    filters = None
+
+        print(filters)
+
+        if filters is not None:
+            distance = filters.get('distance')
+            keywords = filters.get('keywords')
+            categories = filters.get('categories')
+
+            pois = PointOfInterest.objects.all() 
+
+            if distance:
+                lat = distance.get('lat')
+                lon = distance.get('lon')
+                km = distance.get('km')
+                min_lat = lat - km
+                max_lat = lat + km
+                min_lon = lon - km
+                max_lon = lon + km
+                pois = pois.filter(latitude__range=(min_lat, max_lat), longitude__range=(min_lon, max_lon))
+
+            if keywords:
+                pois = pois.filter(Q(district__icontains=keywords) | Q(description__icontains=keywords))
+
+            if categories:
+                pois = pois.filter(category__in=categories)
+        else:
+            pois = PointOfInterest.objects.all()
+        
+        serializer_class = PointOfInterestSerializer
+        serializer = PointOfInterestSerializer(pois, many=True)
+        response_data = {
+            'start': start,
+            'count': count,
+            'total': pois.count(),
+            'data': serializer.data
+        }
+        return Response(response_data, status=status.HTTP_200_OK)
     
 class PoiView(generics.ListAPIView):
     serializer_class = PointOfInterestSerializer
