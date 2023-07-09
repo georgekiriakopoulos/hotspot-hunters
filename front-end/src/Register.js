@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "./components/Login.module.css"
 export const Register = (props) => {
   const [email, setEmail] = useState("");
   const [psw, setPsw] = useState("");
@@ -46,7 +46,7 @@ export const Register = (props) => {
           required
         />
 
-        <button className="submit">Εγγραφή</button>
+        <button className="registerBtn">Εγγραφή</button>
       </form>
       <button className="notTrue" onClick={() => props.onFormSwitch('login')}> Είσαι ήδη μέλος; Συνδέσου!</button>
     </div>

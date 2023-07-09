@@ -87,10 +87,10 @@ function Register({ open, onClose }) {
         </div>
       </div>
       <div>
-        <button> Σύνδεση </button>
+        <button className={style.registerBtn}> Εγγραφή </button>
       </div>
 
-      <button> Δεν είσαι μέλος; Κάνε Εγγραφή</button>
+      <button className={style.notTrue}> Δεν είσαι μέλος; Κάνε Εγγραφή</button>
       </div>    
     </form>
   );

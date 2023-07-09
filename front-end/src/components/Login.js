@@ -52,11 +52,10 @@ function Login({ open, onClose }) {
 
       <div>
         <div className="loginForm">
-          <label htmlFor="email">
+          <label className={style.label} htmlFor="email">
             <b>Email</b>
           
           <input
-          className={style.in}
             type="email"
             placeholder="π.χ youremail@youremail.com"
             name="email"
@@ -87,10 +86,10 @@ function Login({ open, onClose }) {
         </div>
       </div>
       <div>
-        <button> Σύνδεση </button>
+        <button className={style.loginBtn}> Σύνδεση </button>
       </div>
 
-      <button> Δεν είσαι μέλος; Κάνε Εγγραφή</button>
+      <button className={style.notTrue}> Δεν είσαι μέλος; Κάνε Εγγραφή</button>
       </div>    
     </form>
   );
