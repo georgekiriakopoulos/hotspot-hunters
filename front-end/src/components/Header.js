@@ -4,6 +4,7 @@ import 'reactjs-popup/dist/index.css';
 import { useState } from 'react';
 import Login from '../components/Login'
 import Register from './Register'
+import { GetAuthenticationToken  } from './authentication/GetAuthenticationToken';
  
 
 
@@ -11,16 +12,23 @@ function Header ()  {
 
     const [openpopuplogin, setvaluelogin] = useState(false);
     const [openpopupregister, setvalueregister] = useState(false);
+    const temp = GetAuthenticationToken();
+
 
     return(
+        
         <header className={classes.t3}>
             <div className={classes.header} >
             <img src={logo} width={200} height={200} alt = "logo"/>
                 <nav>
                     <ul>
-                        <li>Home</li>
-                        <li>Contact</li>
-                        <li>Info</li>
+
+                       
+
+                        {temp && (<div  >
+                            ggggg
+                        </div>)}
+
                         <button onClick={ () => setvalueregister(true)}
                         >Register</button> 
                         <button onClick={ () => setvaluelogin(true)}

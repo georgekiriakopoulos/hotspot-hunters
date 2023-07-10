@@ -11,6 +11,8 @@ import "leaflet/dist/leaflet.css";
 import styles from "./Mc.module.css";
 import L from "leaflet";
 import React, { useState, useEffect } from "react";
+import { GetAuthenticationToken  } from './authentication/GetAuthenticationToken';
+import jwt_decode from "jwt-decode";
 
 function Mapcomp() {
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -44,11 +46,27 @@ function Mapcomp() {
 
   const handleSaveButtonClick = () => {
     if (selectedMarker) {
+
+
+      ////////
+      const tokenid=GetAuthenticationToken();
+      console.log(tokenid);
+
+      var decode = jwt_decode(tokenid);
+      console.log(decode);
+      console.log(decode.user_id);
+
+
+
+
+      ///////
       const { latitude, longitude } = selectedMarker;
       const circleData = {
+        user_id:decode.user_id,
         latitude,
         longitude,
-        radius: 5000, // Assuming the radius is fixed at 10000 meters
+        radius: 5000, // Assuming the radius is fixed at 5000 meters
+
       };
 
       fetch("http://127.0.0.1:8000/api/poi/poi/circle/", {
@@ -139,7 +157,7 @@ function Mapcomp() {
                 </div>
               </Popup>
               <Tooltip>
-                Click to save the area within 10km <br /> or right click to
+                Click to save the area within 5km <br /> or right click to
                 delete point!
               </Tooltip>
             </Marker>

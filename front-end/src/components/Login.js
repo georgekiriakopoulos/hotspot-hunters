@@ -1,5 +1,8 @@
 import { React, useState } from "react";
 import style from "./Login.module.css";
+import Helplogin from './Helplogin';
+import { Navigate } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 // export const Login = (props) => {
 //   const [email, setEmail] = useState("");
@@ -11,14 +14,17 @@ import style from "./Login.module.css";
 function Login({ open, onClose }) {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
+  const [mes, setmes] = useState(false);
 
   const submithandler = (event) => {
     event.preventDefault();
     // console.log(name);
     // console.log(password);
-    actionlogin(name, password);
+    actionlogin(name, password, { open, onClose },setmes);
     setname("");
     setpassword("");
+    onClose();
+    
   };
 
   const usernameinputhandler = (event) => {
@@ -86,10 +92,17 @@ function Login({ open, onClose }) {
         </div>
       </div>
       <div>
-        <button className={style.loginBtn}> Σύνδεση </button>
+        <button className={style.loginBtn} > Σύνδεση </button>
       </div>
 
       <button className={style.notTrue}> Δεν είσαι μέλος; Κάνε Εγγραφή</button>
+      <Helplogin open={mes} >
+
+          
+      </Helplogin>
+  
+      
+      
       </div>    
     </form>
   );
@@ -97,7 +110,8 @@ function Login({ open, onClose }) {
 
 export default Login;
 
-export async function actionlogin(name, password) {
+export async function actionlogin(name, password,{ open, onClose },setmes) {
+
   const datasend = {
     email: name,
     password: password,
@@ -122,5 +136,19 @@ export async function actionlogin(name, password) {
 
   localStorage.setItem('token',token);
 
+
+
+  if(response.status === 401 ){
+    setmes(true);
+
+  }
+  else{
+
+    localStorage.setItem('token',token);
+  
+  }
+  
+
+ 
 
 }

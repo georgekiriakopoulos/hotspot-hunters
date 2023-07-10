@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import style from "./Login.module.css";
+import Help1 from "./Help1";
 
 // export const Login = (props) => {
 //   const [email, setEmail] = useState("");
@@ -8,17 +9,20 @@ import style from "./Login.module.css";
 //     e.preventDefault();
 //     console.log(email);
 
+
 function Register({ open, onClose }) {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
+  const [mes, setmes] = useState(false);
 
   const submithandler = (event) => {
     event.preventDefault();
     // console.log(name);
     // console.log(password);
-    actionregister(name, password);
+    actionregister(name, password,{ open, onClose },setmes);
     setname("");
     setpassword("");
+   
   };
 
   const usernameinputhandler = (event) => {
@@ -91,6 +95,12 @@ function Register({ open, onClose }) {
       </div>
 
       <button className={style.notTrue}> Δεν είσαι μέλος; Κάνε Εγγραφή</button>
+      
+      <Help1 open={mes} >
+
+          
+        </Help1>
+      
       </div>    
     </form>
   );
@@ -98,7 +108,7 @@ function Register({ open, onClose }) {
 
 export default Register;
 
-export async function actionregister(name, password) {
+export async function actionregister(name, password, { open, onClose }, setmes) {
   const datasend = {
     email: name,
     password: password,
@@ -117,5 +127,11 @@ export async function actionregister(name, password) {
     requestOptions
   ).then((response) => response.json());
 
-  console.log(response);
+  console.log(response.Status);
+  if (response.Status === "user with this email already exists."){
+    setmes(true);
+  }
+  else{
+    onClose();
+  }
 }
