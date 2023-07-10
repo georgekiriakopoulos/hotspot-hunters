@@ -7,6 +7,12 @@ import Register from './Register'
 import { GetAuthenticationToken  } from './authentication/GetAuthenticationToken';
 import { DeleteToken } from './authentication/Deletetoken';
  
+function h1(){
+    DeleteToken();
+    window.location.reload(false);
+
+
+}
 
 
 function Header ()  {
@@ -29,7 +35,7 @@ function Header ()  {
                         {temp && (<div  >
                             <button onClick={ () => setvalueregister(true)}
                         >My spots</button> 
-                            <button onClick={ DeleteToken}
+                            <button onClick={ h1} 
                         >Logout</button> 
                         </div>)}
 

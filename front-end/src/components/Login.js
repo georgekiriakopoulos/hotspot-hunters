@@ -23,7 +23,7 @@ function Login({ open, onClose }) {
     actionlogin(name, password, { open, onClose },setmes);
     setname("");
     setpassword("");
-    onClose();
+  
     
   };
 
@@ -132,7 +132,7 @@ export async function actionlogin(name, password,{ open, onClose },setmes) {
   const requestdata = await response.json();
   const token = requestdata.access;
   console.log("token");
-  console.log(token);
+  console.log(response.status );
 
   localStorage.setItem('token',token);
 
@@ -140,12 +140,14 @@ export async function actionlogin(name, password,{ open, onClose },setmes) {
 
   if(response.status === 401 ){
     setmes(true);
+    console.log("tokrfvervreen");
 
   }
   else{
 
     localStorage.setItem('token',token);
     window.location.reload(false);
+    onClose();
   
   }
   

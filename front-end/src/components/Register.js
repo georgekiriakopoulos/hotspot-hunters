@@ -125,10 +125,10 @@ export async function actionregister(name, password, { open, onClose }, setmes) 
   const response = await fetch(
     "http://127.0.0.1:8000/api/user/register/",
     requestOptions
-  ).then((response) => response.json());
+  );
 
-  console.log(response.Status);
-  if (response.Status === "user with this email already exists."){
+  console.log(response.status);
+  if (response.status === 400 ){
     setmes(true);
   }
   else{
