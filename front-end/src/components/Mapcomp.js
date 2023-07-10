@@ -48,7 +48,6 @@ function Mapcomp() {
     if (selectedMarker) {
 
 
-      ////////
       const tokenid=GetAuthenticationToken();
       console.log(tokenid);
 
@@ -59,13 +58,13 @@ function Mapcomp() {
 
 
 
-      ///////
+     
       const { latitude, longitude } = selectedMarker;
       const circleData = {
         user_id:decode.user_id,
         latitude,
         longitude,
-        radius: 5000, // Assuming the radius is fixed at 5000 meters
+        radius: 5000, 
 
       };
 
@@ -79,11 +78,11 @@ function Mapcomp() {
         .then((response) => response.json())
         .then((data) => {
           console.log("Circle saved successfully:", data);
-          // Perform any necessary actions after saving the circle
+          
         })
         .catch((error) => {
           console.error("Error saving circle:", error);
-          // Handle the error case
+          
         });
     }
   };

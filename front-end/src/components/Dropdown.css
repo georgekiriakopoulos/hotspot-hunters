@@ -1,0 +1,12 @@
+.dropdown {
+  display:inline-flex;
+  justify-content: center;
+  align-items: center;
+  height:auto;
+  width: fit-content;
+}
+
+.dropdown option {
+  display: flex;
+  gap: 20px;
+}
