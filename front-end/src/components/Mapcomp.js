@@ -117,7 +117,7 @@ function Mapcomp() {
           }}
         >
           <Tooltip>
-            Click to save the area within 10km <br /> or right click to delete
+            Click to save the area within 5km <br /> or right click to delete
             point!
           </Tooltip>
         </Marker>
@@ -174,7 +174,7 @@ function Mapcomp() {
                 Click on the circled area to save or right click to close!
               </Tooltip>
               <Popup>
-                Save the area within 10km of your chosen wifi point so that you
+                Save the area within 5km of your chosen wifi point so that you
                 get notified when new points are available!
                 <br />
                 <button
