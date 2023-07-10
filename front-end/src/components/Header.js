@@ -35,7 +35,7 @@ function Header ()  {
                         {temp && (<div  >
                             <button onClick={ () => setvalueregister(true)}
                         >Περιοχές ενδιαφέροντος</button> 
-                            <button onClick={ DeleteToken}
+                            <button onClick={h1}
                         >Αποσύνδεση</button> 
                         </div>)}
 
