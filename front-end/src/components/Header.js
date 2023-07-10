@@ -28,9 +28,9 @@ function Header ()  {
                         <div>
                         {temp && (<div  >
                             <button onClick={ () => setvalueregister(true)}
-                        >My spots</button> 
+                        >Περιοχές ενδιαφέροντος</button> 
                             <button onClick={ DeleteToken}
-                        >Logout</button> 
+                        >Αποσύνδεση</button> 
                         </div>)}
 
                         </div>
@@ -38,9 +38,9 @@ function Header ()  {
                         <div>
                         {!temp && (<div  >
                             <button onClick={ () => setvalueregister(true)}
-                        >Register</button> 
+                        >Εγγραφή</button> 
                         <button onClick={ () => setvaluelogin(true)}
-                        >Login</button>
+                        >Σύνδεση</button>
                         </div>)}
 
                         </div>
@@ -53,7 +53,7 @@ function Header ()  {
             </div>
             <div className={classes.header1} >
                
-                <h2 className={classes.t2}>FREE WIFI</h2>
+                <h2 className={classes.t2}>Ψάχνεις δωρεάν wifi; Εδώ θα βρεις όλα τα σημεία της Ελλάδας!</h2>
                 <Login open={openpopuplogin}
                         onClose={ ()=>setvaluelogin(false)} />
                 <Register open={openpopupregister}

@@ -45,7 +45,7 @@ function Register({ open, onClose }) {
       <h3 className={style.t1} onClick={onClose}> </h3>
 
       
-      <h2 className={style.t3} >KANE EGGRAFI TORA</h2>
+      <h2 className={style.t3} >Κάνε εγγραφή!</h2>
       <h3 className={style.t1} onClick={onClose}>X</h3>
 
 

@@ -34,7 +34,7 @@ function App() {
           <SearchResultsList results={results} />
         )}
       </div>
-      <div className="dropdown-filter">
+      <div>
         <p>Δήμος</p>
         <div className="dropdown-filter">
           <DropdownFilter
