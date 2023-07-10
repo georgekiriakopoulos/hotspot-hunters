@@ -4,12 +4,7 @@ import Helplogin from './Helplogin';
 import { Navigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 
-// export const Login = (props) => {
-//   const [email, setEmail] = useState("");
-//   const [psw, setPsw] = useState("");
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log(email);
+
 
 function Login({ open, onClose }) {
   const [name, setname] = useState("");
@@ -47,7 +42,7 @@ function Login({ open, onClose }) {
       <h3 className={style.t1} onClick={onClose}> </h3>
 
       
-      <h2 className={style.t3} >ΣΥΝΔΕΣΟΥ</h2>
+      <h2 className={style.t3} >Συνδέσου!</h2>
       <h3 className={style.t1} onClick={onClose}>X</h3>
 
 

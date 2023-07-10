@@ -7,17 +7,17 @@ export const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
 
   const fetchData = (value) => {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("http://127.0.0.1:8000/api/poi/poi/search")
       .then((response) => response.json())
       .then((json) => {
-        const results = json.filter((user) => {
+        const results = json.data.filter((point) => {
           return (
-            value &&
-            user &&
-            user.name &&
-            user.name.toLowerCase().includes(value)
+            point.title.toLowerCase().includes(value.toLowerCase()) ||
+            (point.district.toLowerCase().includes(value.toLowerCase())) ||
+            (point.description.toLowerCase().includes(value.toLowerCase()))
           );
         });
+        console.log(results);
         setResults(results);
       });
   };
@@ -31,7 +31,7 @@ export const SearchBar = ({ setResults }) => {
     <div className="input-wrapper">
       <FaSearch id="search-icon" />
       <input
-        placeholder="Type to search..."
+        placeholder="Αναζήτηση..."
         value={input}
         onChange={(e) => handleChange(e.target.value)}
       />
