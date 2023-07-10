@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Login from '../components/Login'
 import Register from './Register'
 import { GetAuthenticationToken  } from './authentication/GetAuthenticationToken';
+import { DeleteToken } from './authentication/Deletetoken';
  
 
 
@@ -24,15 +25,28 @@ function Header ()  {
                     <ul>
 
                        
-
+                        <div>
                         {temp && (<div  >
-                            ggggg
+                            <button onClick={ () => setvalueregister(true)}
+                        >My spots</button> 
+                            <button onClick={ DeleteToken}
+                        >Logout</button> 
                         </div>)}
 
-                        <button onClick={ () => setvalueregister(true)}
+                        </div>
+
+                        <div>
+                        {!temp && (<div  >
+                            <button onClick={ () => setvalueregister(true)}
                         >Register</button> 
                         <button onClick={ () => setvaluelogin(true)}
                         >Login</button>
+                        </div>)}
+
+                        </div>
+                     
+
+
 
                     </ul>
                 </nav>

@@ -145,6 +145,7 @@ export async function actionlogin(name, password,{ open, onClose },setmes) {
   else{
 
     localStorage.setItem('token',token);
+    window.location.reload(false);
   
   }
   
